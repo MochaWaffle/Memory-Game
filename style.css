@@ -2,10 +2,36 @@ body {
     text-align: center;
 }
 
+.window-frame {
+    display: block;
+    margin: 0 auto; 
+    background: url('/images/window.png') no-repeat center center;
+    background-size:contain;
+    width: 100%; /* Adjust this to match the desired size */
+    height: 100%; /* Adjust this to match the desired size */
+    padding: 0px;
+  }
+  
+  .window-content {
+    margin: 0 auto;
+    width: 70%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 100vh;
+  }
+  
 .container {
-    width: 50%;
+    width: 500px;
     height: 500px;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
 }
@@ -16,14 +42,19 @@ body {
 }
 
 .col {
-    border: 2px solid red;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* border: 2px solid red; */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px; /* Add margin for spacing */
+}
+.colMiddle {
+    margin-right: 5%;
+    margin-left: 5%;
 }
 .glow {
-    background-color: #ffcc00; /* Change to your desired color */
+    background-color: #e7ddc8; /* Change to your desired color */
     transition: background-color 0.3s ease; /* Add a smooth transition effect */
 }
 .error {
