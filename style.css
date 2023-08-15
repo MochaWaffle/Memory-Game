@@ -1,0 +1,32 @@
+body {
+    text-align: center;
+}
+
+.container {
+    width: 50%;
+    height: 500px;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    flex: 1;
+    display: flex;
+}
+
+.col {
+    border: 2px solid red;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.glow {
+    background-color: #ffcc00; /* Change to your desired color */
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+.error {
+    background-color: red;
+    transition: background-color 0.3s ease;
+}
