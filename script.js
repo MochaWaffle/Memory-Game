@@ -1,29 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
     const columns = document.querySelectorAll(".col");
     const startButton = document.getElementById("startButton");
+    const gameModeBtn = document.getElementById("gameMode");
     const normalModeButton = document.getElementById("normalModeButton");
     const nightmareModeButton = document.getElementById("nightmareModeButton");
     const modeButtons = [normalModeButton, nightmareModeButton];
-
+    const levelText = document.getElementById("levelText");
     let sequence = [];
     let playerIndex = 0;
     let currentLevel = 1;
     let lives = 1; // Change this to 3 after unlocking
     let gameEnd = false;
-    
+    let playerTurn = true;
+    let speed = 3;
+
     startButton.addEventListener("click", function () {
         if (startButton.textContent === "Start") {
+            resetGame();
             startGame();
         }
+        else {
+            if (playerTurn == true) {
+                currentLevel = 1;
+                startGame();
+            }
+            
+        }
     });
-
-    resetButton.addEventListener("click", resetGame);
-
+    gameModeBtn.addEventListener("click", function() {
+        if (playerTurn == true)
+        {
+            if (gameModeBtn.textContent == "Normal") {
+                gameModeBtn.textContent = "Nightmare";
+                gameModeBtn.classList.remove("btn-info");
+                gameModeBtn.classList.add("btn-danger");
+                levelText.textContent = "Nightmare";
+                levelText.style.color = "Red";
+                startButton.textContent = "Start";
+                resetGame();
+            } else {
+                gameModeBtn.textContent = "Normal";
+                gameModeBtn.classList.remove("btn-danger");
+                gameModeBtn.classList.add("btn-info");
+                levelText.textContent = "Normal";
+                levelText.style.color = "Black";
+                startButton.textContent = "Start";
+                resetGame()
+            }
+        }
+        
+    })
     function startGame() {
         resetGame();
         generateRandomSequence();
         playSequence();
-        startButton.textContent = "Level " + currentLevel;
+        startButton.textContent = "Reset";
+        levelText.textContent = "Level " + currentLevel;
     }
 
     function resetGame() {
@@ -44,6 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function playSequence() {
+        console.log("shouldn't click");
+        playerTurn = false;
         let index = 0;
         const interval = setInterval(() => {
             const columnIndex = sequence[index];
@@ -55,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (index === sequence.length) {
                     clearInterval(interval);
                     setTimeout(() => {
+                        playerTurn = true;
+                        console.log("can click");
                         allowPlayerInput();
                     }, 500); // Add a delay before allowing player input
                 }
@@ -95,9 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     gameEnd = false; // Allow player input after reset
                 } else {
                     alert("Game over! You ran out of lives.");
-                    resetGame();
                     currentLevel = 1;
                     startButton.textContent = "Start";
+                    resetGame();
+                    
                 }
             }, 1000);
         }
