@@ -16,10 +16,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const gameModeBtn = document.getElementById("gameMode");
     const levelText = document.getElementById("levelText");
+    const sounds = [
+        document.getElementById("jumpscareSound"),
+        document.getElementById("heartDamage"),
+    ]
+    const hearts = [
+        document.getElementById("heart1"),
+        document.getElementById("heart2"),
+        document.getElementById("heart3")
+    ];
+    const heartTypes = [
+        document.getElementById("heartType1"),
+        document.getElementById("heartType2"),
+        document.getElementById("heartType3")
+    ]
     let sequence = [];
     let playerIndex = 0;
     // let currentLevel = 1;
-    let livesUnlocked = 0;
+    let livesUnlocked = 2;
     let lives = 1 + livesUnlocked; // Change this to 3 after unlocking
     let gameEnd = false;
     let playerTurn = true;
@@ -64,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 levelText.textContent = "Nightmare";
                 levelText.style.color = "Red";
                 startButton.textContent = "Start";
+                startColorSwitchToWarning(false);
                 nightmareMode();
                 resetGame();
                 
@@ -75,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 levelText.textContent = "Normal";
                 levelText.style.color = "Black";
                 startButton.textContent = "Start";
+                startColorSwitchToWarning(false);
                 normalMode();
                 resetGame();
                 
@@ -88,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         generateRandomSequence();
         playSequence();
         startButton.textContent = "Reset";
+        startColorSwitchToWarning(true);
         levelText.textContent = "Level " + currentLevel;
     }
 
@@ -151,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentLevel++;
                     if (currentLevel > 10) {
                         // Player wins!
+                        gameEnd = true;
                         alert("Congratulations! You won!");
                     } else {
                         startGame();
@@ -162,17 +180,13 @@ document.addEventListener("DOMContentLoaded", function () {
             this.classList.add("error");
             setTimeout(() => {
                 if (lives > 1) {
-                    lives--;
-                    resetGame();
-                    gameEnd = false; // Allow player input after reset
+                    takeDamage();
                 } else {
-                    alert("Game over! You ran out of lives.");
-                    // currentLevel = 1;
-                    // startButton.textContent = "Start";
-                    // resetGame();
-                    saveLevelToStorage();
-                    window.location.href = "gameOverNormal.html";
-                    // console.log(currentLevel);
+                    // heartTypes[0].src = "images/heartDamaged.png";
+                    // alert("Game over! You ran out of lives.");
+                    // saveLevelToStorage();
+                    // window.location.href = "gameOverNormal.html";
+                    gameOver();
                 }
             }, 1000);
         }
@@ -180,6 +194,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function nightmareMode(){
         tileGlowLength = 300;
         nextGlowDelay = 300;
+        lives = 1;
+        playSound(0);
+        for (let i = 1; i < lives + livesUnlocked; i++){
+            hearts[i].style.display = "none";
+        }
         bodyElement.style.backgroundImage = `url(${backgroundImages[1]})`
     }
     
@@ -187,13 +206,43 @@ document.addEventListener("DOMContentLoaded", function () {
         tileGlowLength = 1000;
         nextGlowDelay = 1000;
         lives = 1 + livesUnlocked;
+        for (let i = 0; i < lives; i++)
+        {
+            hearts[i].style.display = "inline";
+            heartTypes[i].src = "images/heart.png";
+        }
         bodyElement.style.backgroundImage = `url(${backgroundImages[0]})`
     }
     function gameOver(){
-        currentLevel = 1;
-        startButton.textContent = "Start";
-        resetGame();
+        heartTypes[0].src = "images/heartDamaged.png";
+        playSound(1);
+        setTimeout(() => {
+            alert("Game over! You ran out of lives.");
+            saveLevelToStorage();
+            window.location.href = "gameOver.html";
+        },500);
     }
-
+    function startColorSwitchToWarning(switchBoolean){
+        if (switchBoolean == true) {
+            startButton.classList.remove("btn-primary");
+            startButton.classList.add("btn-warning");
+        } else {
+            startButton.classList.remove("btn-warning");
+            startButton.classList.add("btn-primary");
+        }
+    }
+    function playSound(index){
+        sounds[index].currentTime = 0;
+        sounds[index].play();
+    }
+    function takeDamage()
+    {
+        playSound(1);
+        lives--;
+        heartTypes[lives].src = "images/heartDamaged.png"
+        resetGame();
+        startGame();
+        gameEnd = false;
+    }
 });
 

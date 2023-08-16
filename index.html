@@ -12,7 +12,12 @@
   </head>
   <body>
     <div class="vertical-center-container">
-        <h1 id="levelText">Normal Mode</h1>
+        <h1 id="levelText">Normal Mode </h1>
+        <h1>
+            <span id="heart1"><img src="images/heart.png" id="heartType1"></span>
+            <span id="heart2"><img src="images/heart.png" id="heartType2"></span>
+            <span id="heart3"><img src="images/heart.png" id="heartType3"></span>
+        </h1>
         <div class="container">
             <div class="window-frame">
                 <div class="window-content mt-4">
@@ -55,7 +60,8 @@
         <button type="button" id="startButton" class="btn btn-primary m-2">Start</button>
         <button type="button" id="gameMode" class="btn btn-info">Normal</button>
     </div>
-    
+    <audio id="jumpscareSound" src="sounds/jumpscareSound.wav"></audio>
+    <audio id="heartDamage" src="sounds/heartDamage.wav"></audio>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

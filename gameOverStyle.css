@@ -6,9 +6,15 @@ body, html {
     justify-content: center; /* Horizontal centering */
     height: 100%;
     margin: 0;
-    background-color: rgb(147, 156, 153);
     font-family: 'Bebas Neue', sans-serif;
     overflow: hidden; /* Hide overflow to prevent content from showing initially */
+}
+
+body {
+    background-color: rgb(147, 156, 153);
+    background-image: none;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .container {
     display: flex;
