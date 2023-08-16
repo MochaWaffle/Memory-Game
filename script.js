@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         startGame();
                     }
                 }
-            }, 300); // Adjust the delay as needed
+            }, 100); // Adjust the delay as needed
         } else {
             gameEnd = true; // Block further input
             this.classList.add("error");
