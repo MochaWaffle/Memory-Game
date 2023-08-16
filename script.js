@@ -1,22 +1,41 @@
+// window.currentLevel = 1;
+// console.log(currentLevel)
+// window.gameModeBtn = document.getElementById("gameMode");
+// window.gameModeBtn.textContent = "Normal";
+// console.log(window.gameModeBtn.textContent);
+export let gameMode;
+export let currentLevel;
 document.addEventListener("DOMContentLoaded", function () {
+    const bodyElement = document.body;
+    const backgroundImages = [
+        "images/nature.jpeg",
+        "images/blood-wall.jpeg",
+        "images/scary-face.jpeg"
+    ]
     const columns = document.querySelectorAll(".col");
     const startButton = document.getElementById("startButton");
     const gameModeBtn = document.getElementById("gameMode");
-    const normalModeButton = document.getElementById("normalModeButton");
-    const nightmareModeButton = document.getElementById("nightmareModeButton");
-    const modeButtons = [normalModeButton, nightmareModeButton];
     const levelText = document.getElementById("levelText");
     let sequence = [];
     let playerIndex = 0;
-    let currentLevel = 1;
+    // let currentLevel = 1;
     let livesUnlocked = 0;
     let lives = 1 + livesUnlocked; // Change this to 3 after unlocking
     let gameEnd = false;
     let playerTurn = true;
     let tileGlowLength = 1000;
     let nextGlowDelay = 1000;
+    // let gameMode = "Normal";
+    gameMode = "Normal";
+    currentLevel = 1;
+
     startButton.addEventListener("click", function () {
         if (startButton.textContent === "Start") {
+            if (gameModeBtn.textContent === "Normal"){
+                gameMode = "Normal";
+                saveGameModeToStorage();
+            }
+            currentLevel = 1;
             resetGame();
             startGame();
         }
@@ -28,10 +47,17 @@ document.addEventListener("DOMContentLoaded", function () {
             
         }
     });
+    function saveGameModeToStorage() {
+        localStorage.setItem('gameMode', gameMode);
+    }
+    function saveLevelToStorage(){
+        localStorage.setItem('level', currentLevel)
+    }
     gameModeBtn.addEventListener("click", function() {
         if (playerTurn == true)
         {
-            if (gameModeBtn.textContent == "Normal") {
+            if (gameMode == "Normal") {
+                gameMode = "Nightmare";
                 gameModeBtn.textContent = "Nightmare";
                 gameModeBtn.classList.remove("btn-info");
                 gameModeBtn.classList.add("btn-danger");
@@ -42,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 resetGame();
                 
             } else {
+                gameMode = "Normal";
                 gameModeBtn.textContent = "Normal";
                 gameModeBtn.classList.remove("btn-danger");
                 gameModeBtn.classList.add("btn-info");
@@ -53,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 
             }
         }
+        saveGameModeToStorage();
         
     })
     function startGame() {
@@ -139,30 +167,33 @@ document.addEventListener("DOMContentLoaded", function () {
                     gameEnd = false; // Allow player input after reset
                 } else {
                     alert("Game over! You ran out of lives.");
-                    currentLevel = 1;
-                    startButton.textContent = "Start";
-                    resetGame();
-                    
+                    // currentLevel = 1;
+                    // startButton.textContent = "Start";
+                    // resetGame();
+                    saveLevelToStorage();
+                    window.location.href = "gameOverNormal.html";
+                    // console.log(currentLevel);
                 }
             }, 1000);
         }
     }
     function nightmareMode(){
-        tileGlowLength = 500;
-        nextGlowDelay = 500;
+        tileGlowLength = 300;
+        nextGlowDelay = 300;
+        bodyElement.style.backgroundImage = `url(${backgroundImages[1]})`
     }
     
     function normalMode(){
         tileGlowLength = 1000;
         nextGlowDelay = 1000;
         lives = 1 + livesUnlocked;
+        bodyElement.style.backgroundImage = `url(${backgroundImages[0]})`
     }
-    // Handle mode buttons
-    modeButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            currentLevel = 1;
-            startGame();
-        });
-    });
+    function gameOver(){
+        currentLevel = 1;
+        startButton.textContent = "Start";
+        resetGame();
+    }
+
 });
 

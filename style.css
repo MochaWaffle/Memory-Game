@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 body, html {
     text-align: center;
     height: 100%;
     margin: 0;
+    background-image: url("/images/nature.jpeg");
+    background-size: cover; /* Cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .vertical-center-container {

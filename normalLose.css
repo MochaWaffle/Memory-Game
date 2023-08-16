@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body, html {
+    display: flex;
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    height: 100%;
+    margin: 0;
+    background-color: rgb(147, 156, 153);
+    font-family: 'Bebas Neue', sans-serif;
+    overflow: hidden; /* Hide overflow to prevent content from showing initially */
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content vertically and horizontally */
+    height: 100%;
+    justify-content: center;
+    margin: 0; /* Remove default container margins */
+    padding: 0; /* Remove default container padding */
+}
+h1 {
+    position: absolute;
+    top: -100px; /* Initial position above the viewport */
+    opacity: 0; /* Initially hidden */
+    font-size: 100px;
+    transition: top 1s ease, opacity 1s ease; /* Transition properties */
+}
+
+body.loaded h1 {
+    top: 30%; /* Final vertical position */
+    opacity: 1; /* Visible */
+}
+#startButton {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
