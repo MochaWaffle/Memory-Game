@@ -1,5 +1,15 @@
-body {
+body, html {
     text-align: center;
+    height: 100%;
+    margin: 0;
+}
+
+.vertical-center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .window-frame {

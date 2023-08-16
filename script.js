@@ -9,11 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let sequence = [];
     let playerIndex = 0;
     let currentLevel = 1;
-    let lives = 1; // Change this to 3 after unlocking
+    let livesUnlocked = 0;
+    let lives = 1 + livesUnlocked; // Change this to 3 after unlocking
     let gameEnd = false;
     let playerTurn = true;
-    let speed = 3;
-
+    let tileGlowLength = 1000;
+    let nextGlowDelay = 1000;
     startButton.addEventListener("click", function () {
         if (startButton.textContent === "Start") {
             resetGame();
@@ -37,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 levelText.textContent = "Nightmare";
                 levelText.style.color = "Red";
                 startButton.textContent = "Start";
+                nightmareMode();
                 resetGame();
+                
             } else {
                 gameModeBtn.textContent = "Normal";
                 gameModeBtn.classList.remove("btn-danger");
@@ -45,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 levelText.textContent = "Normal";
                 levelText.style.color = "Black";
                 startButton.textContent = "Start";
-                resetGame()
+                normalMode();
+                resetGame();
+                
             }
         }
         
@@ -76,10 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function playSequence() {
-        console.log("shouldn't click");
         playerTurn = false;
         let index = 0;
-        const interval = setInterval(() => {
+        
+        function animateTile() {
             const columnIndex = sequence[index];
             columns.forEach(col => col.classList.remove("glow"));
             columns[columnIndex].classList.add("glow");
@@ -87,16 +92,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 columns[columnIndex].classList.remove("glow");
                 index++;
                 if (index === sequence.length) {
-                    clearInterval(interval);
                     setTimeout(() => {
                         playerTurn = true;
-                        console.log("can click");
                         allowPlayerInput();
-                    }, 500); // Add a delay before allowing player input
+                    }, 500);
+                } else {
+                    setTimeout(animateTile, nextGlowDelay); // Use nextGlowDelay here
                 }
-            }, 500); // Adjust the interval as needed
-        }, 1000); // Adjust the interval as needed
+            }, tileGlowLength);
+        }
+        
+        animateTile();
     }
+    
 
     function allowPlayerInput() {
         gameEnd = false; // Allow player input
@@ -113,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 playerIndex++;
                 if (playerIndex === sequence.length) {
                     currentLevel++;
-                    if (currentLevel > 5) {
+                    if (currentLevel > 10) {
                         // Player wins!
                         alert("Congratulations! You won!");
                     } else {
@@ -139,7 +147,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 1000);
         }
     }
-
+    function nightmareMode(){
+        tileGlowLength = 500;
+        nextGlowDelay = 500;
+    }
+    
+    function normalMode(){
+        tileGlowLength = 1000;
+        nextGlowDelay = 1000;
+        lives = 1 + livesUnlocked;
+    }
     // Handle mode buttons
     modeButtons.forEach(button => {
         button.addEventListener("click", function () {
@@ -148,3 +165,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
