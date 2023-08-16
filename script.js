@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const sounds = [
         document.getElementById("jumpscareSound"),
         document.getElementById("heartDamage"),
+        document.getElementById("levelPass"),
+        document.getElementById("nightmareGameplay"),
+        document.getElementById("normalModeGameplay"),
+
     ]
     const hearts = [
         document.getElementById("heart1"),
@@ -133,6 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const columnIndex = sequence[index];
             columns.forEach(col => col.classList.remove("glow"));
             columns[columnIndex].classList.add("glow");
+            if (gameMode === "Nightmare")
+            {
+                playSound(3);
+            } else {
+                playSound(4);
+            }
             setTimeout(() => {
                 columns[columnIndex].classList.remove("glow");
                 index++;
@@ -161,6 +171,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const clickedIndex = Array.from(columns).indexOf(this);
         if (clickedIndex === sequence[playerIndex]) {
             this.classList.add("glow"); // Add glow on correct click
+            if (gameMode === "Nightmare") 
+            {
+                playSound(3);
+            } else {
+                playSound(4);
+            }
+            
             setTimeout(() => {
                 this.classList.remove("glow"); // Remove the glow after a short delay
                 playerIndex++;
@@ -171,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         gameEnd = true;
                         alert("Congratulations! You won!");
                     } else {
+                        playSound(2);
                         startGame();
                     }
                 }
