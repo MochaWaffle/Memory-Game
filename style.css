@@ -1,13 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
+:root {
+  --horizontal-shift: 0px; 
+  --col-size: 70%;
+  --container-width: 500px;
+}
 body, html {
     text-align: center;
     height: 100%;
+    width:100%;
     margin: 0;
     background-image: url("/images/nature.jpeg");
     background-size: cover; /* Cover the entire viewport */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     font-family: 'Bebas Neue', sans-serif;
+    box-sizing: border-box;
 }
 
 .vertical-center-container {
@@ -16,6 +22,7 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100%;
+  border: 2px solid black;
 }
 
 .window-frame {
@@ -26,15 +33,17 @@ body, html {
     width: 100%; /* Adjust this to match the desired size */
     height: 100%; /* Adjust this to match the desired size */
     padding: 0px;
-    /* border: 2px solid purple; */
+    border: 2px solid purple;
+    margin-left: var(--horizontal-shift);
   }
   
   .window-content {
     margin: 0 auto;
-    width: 70%;
+    width: var(--col-size);
     height: 90%;
     display: flex;
     flex-direction: column;
+    border: 2px solid brown;
   }
 
   .centered-container {
@@ -46,9 +55,9 @@ body, html {
   }
   
 .container {
-    width: 500px;
+    width: var(--container-width);
     height: 500px;
-    /* border: 2px solid red; */
+    border: 2px solid red;
     display: flex;
     flex-direction: column;
 }
@@ -56,15 +65,17 @@ body, html {
 .row {
     flex: 1;
     display: flex;
+    border: 2px solid yellow;
 }
 
 .col {
-  /* border: 2px solid rgb(23, 255, 81); */
+  border: 2px solid rgb(23, 255, 81);
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 15px; /* Add margin for spacing */
+  
 }
 .colMiddle {
     margin-right: 5%;
@@ -77,4 +88,86 @@ body, html {
 .error {
     background-color: red;
     transition: background-color 0.3s ease;
+}
+
+@media (max-width: 500px) {
+  :root {
+    --container-width: 450px;
+  }
+  .container {
+    width: var(--container-width);
+    height: 500px;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 490px)
+{
+  :root {
+    --horizontal-shift: -10px; /* Adjust this value for a stronger shift */
+  }
+  .window-frame {
+    display: block;
+    margin: 0 auto; 
+    background: url('/images/window.png') no-repeat center center;
+    background-size:contain;
+    width: 100%; /* Adjust this to match the desired size */
+    height: 100%; /* Adjust this to match the desired size */
+    padding: 0px;
+    border: 2px solid purple;
+    margin-left: var(--horizontal-shift);
+  }
+}
+@media (max-width: 451px) {
+  :root {
+    --container-width: 445px;
+  }
+  .container {
+    width: var(--container-width);
+    height: 500px;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-height: 693px){
+  :root {
+      --col-size: 60%; /* Adjust this value based on shift */
+  }
+  .window-content {
+    margin: 0 auto;
+    width: var(--col-size);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid brown;
+  }
+}
+@media (max-height: 628px){
+  :root {
+      --col-size: 50%; /* Adjust this value based on shift */
+  }
+
+  .window-content {
+    margin: 0 auto;
+    width: var(--col-size);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid brown;
+  }
+}
+@media (max-height: 569px) {
+  :root {
+      --col-size: 40%; /* Adjust this value based on shift */
+  }
+  .window-content {
+    margin: 0 auto;
+    width: var(--col-size);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid brown;
+  }
 }
