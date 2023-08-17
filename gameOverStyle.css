@@ -19,16 +19,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content vertically and horizontally */
-    height: 100%;
-    justify-content: center;
-    margin: 0; /* Remove default container margins */
-    padding: 0px; /* Remove default container padding */
-    border:2px solid red;
-}
+
 h1 {
     position: absolute;
     top: -100px; /* Initial position above the viewport */
@@ -44,6 +35,15 @@ body.loaded h1 {
 #startButton {
     opacity: 0;
     transition: opacity 1s ease;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content vertically and horizontally */
+    height: 100%;
+    justify-content: center;
+    margin: 0; /* Remove default container margins */
+    padding: 0px; /* Remove default container padding */
 }
 @media (max-width: 520px)
 {

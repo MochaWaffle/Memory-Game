@@ -15,7 +15,6 @@ function handleDOMContentLoaded() {
     let gamemode = document.getElementById("gamemode");
     let gamemodeTitle = document.getElementById("gamemodeTitle");
     let highscoreLevel = document.getElementById('highscoreLevel');
-    console.log(storedGameWon);
 
     if (storedGameWon === "true")
     {
@@ -34,7 +33,6 @@ function handleDOMContentLoaded() {
     {
         if (storedGameWon === "false")
         {
-            console.log("should work");
             gamemodeTitle.style.display = 'none';
             highscore.style.display = 'none';
             bodyElement.style.backgroundImage = `url('images/scary-face.jpeg')`;
@@ -102,14 +100,3 @@ function handleDOMContentLoaded() {
 }
 
 document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
-// Function to log screen height when the "p" key is pressed
-function logScreenHeight(event) {
-    if (event.key === "p") {
-        const screenHeight = window.innerHeight;
-        const screenWidth = window.innerWidth;
-        console.log("Screen Height: " + screenHeight + " pixels");
-        console.log("Screen Width: " + screenWidth + " Pixels");
-    }
-}
-
-document.addEventListener("keydown", logScreenHeight);

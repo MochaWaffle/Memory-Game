@@ -1,8 +1,3 @@
-// window.currentLevel = 1;
-// console.log(currentLevel)
-// window.gameModeBtn = document.getElementById("gameMode");
-// window.gameModeBtn.textContent = "Normal";
-// console.log(window.gameModeBtn.textContent);
 export let gameMode;
 export let currentLevel;
 export let gameWon;
@@ -38,14 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ]
     let sequence = [];
     let playerIndex = 0;
-    // let currentLevel = 1;
     let livesUnlocked = 2;
     let lives = 1 + livesUnlocked; // Change this to 3 after unlocking
     let gameEnd = false;
     let playerTurn = true;
     let tileGlowLength = 1000;
     let nextGlowDelay = 1000;
-    // let gameMode = "Normal";
     gameMode = "Normal";
     currentLevel = 1;
 
@@ -67,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
         }
     });
+
     function saveGameModeToStorage() {
         localStorage.setItem('gameMode', gameMode.toString());
     }
@@ -78,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         gameWon = won;
         localStorage.setItem('gameWon', gameWon.toString());
     }
+
     gameModeBtn.addEventListener("click", function() {
         if (playerTurn == true)
         {
@@ -110,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         saveGameModeToStorage();
         
     })
+
     function startGame() {
         resetGame();
         generateRandomSequence();
@@ -208,10 +204,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (lives > 1) {
                     takeDamage();
                 } else {
-                    // heartTypes[0].src = "images/heartDamaged.png";
-                    // alert("Game over! You ran out of lives.");
-                    // saveLevelToStorage();
-                    // window.location.href = "gameOverNormal.html";
                     gameOver();
                 }
             }, 1000);
@@ -222,9 +214,11 @@ document.addEventListener("DOMContentLoaded", function () {
         nextGlowDelay = 300;
         lives = 1;
         playSound(0);
+
         for (let i = 1; i < lives + livesUnlocked; i++){
             hearts[i].style.display = "none";
         }
+
         bodyElement.style.backgroundImage = `url(${backgroundImages[1]})`
     }
     
@@ -243,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
         heartTypes[0].src = "images/heartDamaged.png";
         playSound(1);
         saveGameWon(false);
-        console.log("1: " + gameWon);
+        
         setTimeout(() => {
             alert("Game over! You ran out of lives.");
             saveLevelToStorage();
@@ -252,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     function gameOverWon(){
         saveGameWon(true);
-        console.log("1: ", gameWon);
+        
         setTimeout(() => {
             alert("Congratulations! You won!");
             saveLevelToStorage();
@@ -284,15 +278,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-
-// Function to log screen height when the "p" key is pressed
-function logScreenHeight(event) {
-    if (event.key === "p") {
-        const screenHeight = window.innerHeight;
-        const screenWidth = window.innerWidth;
-        console.log("Screen Height: " + screenHeight + " pixels");
-        console.log("Screen Width: " + screenWidth + " Pixels");
-    }
-}
-
-document.addEventListener("keydown", logScreenHeight);
