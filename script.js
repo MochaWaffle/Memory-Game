@@ -39,6 +39,27 @@ document.addEventListener("DOMContentLoaded", function () {
     let playerTurn = true;
     let tileGlowLength = 1000;
     let nextGlowDelay = 1000;
+    var boxShadowDefaultValue = "rgba(0, 0, 0, 0.25) 0px 54px 55px, " +
+    "rgba(0, 0, 0, 0.12) 0px -12px 30px, " +
+    "rgba(0, 0, 0, 0.12) 0px 4px 6px, " +
+    "rgba(0, 0, 0, 0.17) 0px 12px 13px, " +
+    "rgba(0, 0, 0, 0.09) 0px -3px 5px";
+    var boxShadowGlowNormalValue = "0 0 7px #fff, \
+    0 0 10px #fff, \
+    0 0 21px #fff, \
+    0 0 42px #0fa, \
+    0 0 82px #0fa, \
+    0 0 92px #0fa, \
+    0 0 102px #0fa, \
+    0 0 151px #0fa";
+    var boxShadowGlowNightmareValue = "0 0 7px #fff, \
+    0 0 10px #fff, \
+    0 0 21px #fff, \
+    0 0 42px #F72119, \
+    0 0 82px #F72119, \
+    0 0 92px #F72119, \
+    0 0 102px #F72119, \
+    0 0 151px #F72119";
     gameMode = "Normal";
     currentLevel = 1;
 
@@ -77,30 +98,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (playerTurn == true)
         {
             if (gameMode == "Normal") {
-                gameMode = "Nightmare";
-                gameModeBtn.textContent = "Nightmare";
-                gameModeBtn.classList.remove("btn-info");
-                gameModeBtn.classList.add("btn-danger");
-                levelText.textContent = "Nightmare";
-                levelText.style.color = "Red";
-                startButton.textContent = "Start";
-                startColorSwitchToWarning(false);
                 nightmareMode();
-                resetGame();
-                
             } else {
-                gameMode = "Normal";
-                gameModeBtn.textContent = "Normal";
-                gameModeBtn.classList.remove("btn-danger");
-                gameModeBtn.classList.add("btn-info");
-                levelText.textContent = "Normal";
-                levelText.style.color = "Black";
-                startButton.textContent = "Start";
-                startColorSwitchToWarning(false);
-                normalMode();
-                resetGame();
-                
+                normalMode();                
             }
+            startButton.textContent = "Start";
+            startColorSwitchToWarning(false);
+            resetGame();
         }
         saveGameModeToStorage();
         
@@ -139,15 +143,20 @@ document.addEventListener("DOMContentLoaded", function () {
         function animateTile() {
             const columnIndex = sequence[index];
             columns.forEach(col => col.classList.remove("glow"));
+            columns.forEach(col => col.style.boxShadow = boxShadowDefaultValue );
             columns[columnIndex].classList.add("glow");
-            if (gameMode === "Nightmare")
-            {
-                playSound(3);
-            } else {
+
+            if (gameMode === "Normal") {
+                columns[columnIndex].style.boxShadow = boxShadowGlowNormalValue;
                 playSound(4);
+            } else {
+                columns[columnIndex].style.boxShadow = boxShadowGlowNightmareValue;
+                playSound(3);
             }
+        
             setTimeout(() => {
                 columns[columnIndex].classList.remove("glow");
+                columns[columnIndex].style.boxShadow = boxShadowDefaultValue;
                 index++;
                 if (index === sequence.length) {
                     setTimeout(() => {
@@ -174,15 +183,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const clickedIndex = Array.from(columns).indexOf(this);
         if (clickedIndex === sequence[playerIndex]) {
             this.classList.add("glow"); // Add glow on correct click
-            if (gameMode === "Nightmare") 
+            
+            if (gameMode === "Normal") 
             {
-                playSound(3);
-            } else {
+                this.style.boxShadow = boxShadowGlowNormalValue;
                 playSound(4);
+                
+            } else {
+                this.style.boxShadow = boxShadowGlowNightmareValue;
+                playSound(3);
             }
             
             setTimeout(() => {
                 this.classList.remove("glow"); // Remove the glow after a short delay
+                this.style.boxShadow = boxShadowDefaultValue;
                 playerIndex++;
                 if (playerIndex === sequence.length) {
                     currentLevel++;
@@ -200,6 +214,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             gameEnd = true; // Block further input
             this.classList.add("error");
+            if (gameMode === "Normal")
+            {
+                this.style.boxShadow = boxShadowGlowNormalValue;
+            } else {
+                this.style.boxShadow = boxShadowGlowNightmareValue;
+            }
             setTimeout(() => {
                 if (lives > 1) {
                     takeDamage();
@@ -210,6 +230,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     function nightmareMode(){
+        gameMode = "Nightmare";
+        gameModeBtn.textContent = "Nightmare";
+        gameModeBtn.classList.remove("btn-info");
+        gameModeBtn.classList.add("btn-danger");
+        levelText.textContent = "Nightmare";
+        levelText.style.color = "Red";
+        levelText.style.textShadow = "2px 2px 5px red";
         tileGlowLength = 300;
         nextGlowDelay = 300;
         lives = 1;
@@ -223,6 +250,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     function normalMode(){
+        gameMode = "Normal";
+        gameModeBtn.textContent = "Normal";
+        gameModeBtn.classList.remove("btn-danger");
+        gameModeBtn.classList.add("btn-info");
+        levelText.textContent = "NORMAL MODE";
+        levelText.style.color = "Black";
+        levelText.style.textShadow = "2px 2px 5px greenyellow";
         tileGlowLength = 1000;
         nextGlowDelay = 1000;
         lives = 1 + livesUnlocked;
@@ -275,6 +309,9 @@ document.addEventListener("DOMContentLoaded", function () {
         startGame();
         gameEnd = false;
     }
+    function glowTile(glowColor)
+    {
 
+    }
 
 });
