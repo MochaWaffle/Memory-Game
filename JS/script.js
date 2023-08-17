@@ -4,9 +4,9 @@ export let gameWon;
 document.addEventListener("DOMContentLoaded", function () {
     const bodyElement = document.body;
     const backgroundImages = [
-        "images/nature.jpeg",
-        "images/blood-wall.jpeg",
-        "images/scary-face.jpeg"
+        "../images/nature.jpeg",
+        "../images/blood-wall.jpeg",
+        "../images/scary-face.jpeg"
     ]
     const columns = document.querySelectorAll(".col");
     const startButton = document.getElementById("startButton");
@@ -263,19 +263,19 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < lives; i++)
         {
             hearts[i].style.display = "inline";
-            heartTypes[i].src = "images/heart.png";
+            heartTypes[i].src = "../images/heart.png";
         }
         bodyElement.style.backgroundImage = `url(${backgroundImages[0]})`
     }
     function gameOver(){
-        heartTypes[0].src = "images/heartDamaged.png";
+        heartTypes[0].src = "../images/heartDamaged.png";
         playSound(1);
         saveGameWon(false);
         
         setTimeout(() => {
             alert("Game over! You ran out of lives.");
             saveLevelToStorage();
-            window.location.href = "gameOver.html";
+            window.location.href = "../HTML/gameOver.html";
         },500);
     }
     function gameOverWon(){
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             alert("Congratulations! You won!");
             saveLevelToStorage();
-            window.location.href = "gameOver.html";
+            window.location.href = "../HTML/gameOver.html";
         },500);
     }
     function startColorSwitchToWarning(switchBoolean){
@@ -304,14 +304,9 @@ document.addEventListener("DOMContentLoaded", function () {
     {
         playSound(1);
         lives--;
-        heartTypes[lives].src = "images/heartDamaged.png"
+        heartTypes[lives].src = "../images/heartDamaged.png"
         resetGame();
         startGame();
         gameEnd = false;
     }
-    function glowTile(glowColor)
-    {
-
-    }
-
 });

@@ -35,21 +35,21 @@ function handleDOMContentLoaded() {
         {
             gamemodeTitle.style.display = 'none';
             highscore.style.display = 'none';
-            bodyElement.style.backgroundImage = `url('images/scary-face.jpeg')`;
+            bodyElement.style.backgroundImage = `url('../images/scary-face.jpeg')`;
             jumpscareSound.currentTime = 0;
             jumpscareSound.play();
             setTimeout(() => {
                 gamemodeTitle.style.display = 'inline';
                 highscore.style.display = 'inline';
                 bodyElement.style.backgroundColor = 'transparent';
-                bodyElement.style.backgroundImage = `url('images/blood-wall.jpeg')`;
+                bodyElement.style.backgroundImage = `url('../images/blood-wall.jpeg')`;
                 title.style.color = 'red'
                 gamemode.style.color = 'red';
                 playAnimation();
             },1500);
         } else {
             bodyElement.style.backgroundColor = 'transparent';
-            bodyElement.style.backgroundImage = `url('images/blood-wall.jpeg')`;
+            bodyElement.style.backgroundImage = `url('../images/blood-wall.jpeg')`;
             title.style.color = 'lightgreen'
             gamemode.style.color = 'red';
             playAnimation();
@@ -67,7 +67,7 @@ function handleDOMContentLoaded() {
             startButton.style.opacity = "1"; // Make the button visible
             startButton.addEventListener("click", function() {
                 // Redirect to the index.html page
-                window.location.href = "index.html";
+                window.location.href = "../HTML/index.html";
             });
         }, 1500); // Time it appears (in milliseconds)
         gamemodeTitle.style.color = 'white';
