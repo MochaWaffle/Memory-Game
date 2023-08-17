@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
+:root {
+    --title-size: 100px;
+    --title-vertical-position: 30%;
+  }
 body, html {
     display: flex;
     align-items: center; /* Vertical centering */
@@ -30,15 +33,78 @@ h1 {
     position: absolute;
     top: -100px; /* Initial position above the viewport */
     opacity: 0; /* Initially hidden */
-    font-size: 100px;
+    font-size: var(--title-size);
     transition: top 1s ease, opacity 1s ease; /* Transition properties */
 }
 
 body.loaded h1 {
-    top: 30%; /* Final vertical position */
+    top: var(--title-vertical-position); /* Final vertical position */
     opacity: 1; /* Visible */
 }
 #startButton {
     opacity: 0;
     transition: opacity 1s ease;
+}
+@media (max-width: 520px)
+{
+    :root {
+        --title-size:90px;
+    }
+    h1 {
+        position: absolute;
+        top: -100px; /* Initial position above the viewport */
+        opacity: 0; /* Initially hidden */
+        font-size: var(--title-size);
+        transition: top 1s ease, opacity 1s ease; /* Transition properties */
+    }
+}
+
+@media (max-height: 650px){
+    :root {
+        --title-vertical-position: 25%;
+    }
+    body.loaded h1 {
+        top: var(--title-vertical-position); /* Final vertical position */
+        opacity: 1; /* Visible */
+    }
+}
+
+@media (max-height: 530px){
+    :root {
+        --title-vertical-position: 20%;
+    }
+    body.loaded h1 {
+        top: var(--title-vertical-position); /* Final vertical position */
+        opacity: 1; /* Visible */
+    }
+}
+
+@media (max-height: 445px){
+    :root {
+        --title-vertical-position: 15%;
+    }
+    body.loaded h1 {
+        top: var(--title-vertical-position); /* Final vertical position */
+        opacity: 1; /* Visible */
+    }
+}
+
+@media (max-height: 385px){
+    :root {
+        --title-vertical-position: 10%;
+    }
+    body.loaded h1 {
+        top: var(--title-vertical-position); /* Final vertical position */
+        opacity: 1; /* Visible */
+    }
+}
+
+@media (max-height: 335px){
+    :root {
+        --title-vertical-position: 5%;
+    }
+    body.loaded h1 {
+        top: var(--title-vertical-position); /* Final vertical position */
+        opacity: 1; /* Visible */
+    }
 }

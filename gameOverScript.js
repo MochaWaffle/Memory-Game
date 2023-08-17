@@ -102,3 +102,14 @@ function handleDOMContentLoaded() {
 }
 
 document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
+// Function to log screen height when the "p" key is pressed
+function logScreenHeight(event) {
+    if (event.key === "p") {
+        const screenHeight = window.innerHeight;
+        const screenWidth = window.innerWidth;
+        console.log("Screen Height: " + screenHeight + " pixels");
+        console.log("Screen Width: " + screenWidth + " Pixels");
+    }
+}
+
+document.addEventListener("keydown", logScreenHeight);
