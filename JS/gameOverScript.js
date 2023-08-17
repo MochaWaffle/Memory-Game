@@ -35,7 +35,7 @@ function handleDOMContentLoaded() {
         {
             gamemodeTitle.style.display = 'none';
             highscore.style.display = 'none';
-            bodyElement.style.backgroundImage = `url('../images/scary-face.jpeg')`;
+            bodyElement.style.backgroundImage = `url('../images/jumpscareImage.jpg')`;
             jumpscareSound.currentTime = 0;
             jumpscareSound.play();
             setTimeout(() => {
