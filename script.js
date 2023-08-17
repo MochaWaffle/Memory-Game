@@ -5,6 +5,7 @@
 // console.log(window.gameModeBtn.textContent);
 export let gameMode;
 export let currentLevel;
+export let gameWon;
 document.addEventListener("DOMContentLoaded", function () {
     const bodyElement = document.body;
     const backgroundImages = [
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const gameModeBtn = document.getElementById("gameMode");
     const levelText = document.getElementById("levelText");
+    const winLevel = 10;
     const sounds = [
         document.getElementById("jumpscareSound"),
         document.getElementById("heartDamage"),
@@ -66,10 +68,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     function saveGameModeToStorage() {
-        localStorage.setItem('gameMode', gameMode);
+        localStorage.setItem('gameMode', gameMode.toString());
     }
     function saveLevelToStorage(){
-        localStorage.setItem('level', currentLevel)
+        localStorage.setItem('level', currentLevel.toString())
+    }
+    function saveGameWon(won)
+    {
+        gameWon = won;
+        localStorage.setItem('gameWon', gameWon.toString());
     }
     gameModeBtn.addEventListener("click", function() {
         if (playerTurn == true)
@@ -183,10 +190,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 playerIndex++;
                 if (playerIndex === sequence.length) {
                     currentLevel++;
-                    if (currentLevel > 10) {
+                    if (currentLevel > winLevel) {
                         // Player wins!
                         gameEnd = true;
-                        alert("Congratulations! You won!");
+                        gameOverWon();
+
                     } else {
                         playSound(2);
                         startGame();
@@ -234,8 +242,19 @@ document.addEventListener("DOMContentLoaded", function () {
     function gameOver(){
         heartTypes[0].src = "images/heartDamaged.png";
         playSound(1);
+        saveGameWon(false);
+        console.log("1: " + gameWon);
         setTimeout(() => {
             alert("Game over! You ran out of lives.");
+            saveLevelToStorage();
+            window.location.href = "gameOver.html";
+        },500);
+    }
+    function gameOverWon(){
+        saveGameWon(true);
+        console.log("1: ", gameWon);
+        setTimeout(() => {
+            alert("Congratulations! You won!");
             saveLevelToStorage();
             window.location.href = "gameOver.html";
         },500);

@@ -23,7 +23,8 @@ body {
     height: 100%;
     justify-content: center;
     margin: 0; /* Remove default container margins */
-    padding: 0; /* Remove default container padding */
+    padding: 0px; /* Remove default container padding */
+    border:2px solid red;
 }
 h1 {
     position: absolute;

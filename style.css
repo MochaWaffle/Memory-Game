@@ -26,6 +26,7 @@ body, html {
     width: 100%; /* Adjust this to match the desired size */
     height: 100%; /* Adjust this to match the desired size */
     padding: 0px;
+    /* border: 2px solid purple; */
   }
   
   .window-content {
@@ -58,7 +59,7 @@ body, html {
 }
 
 .col {
-    /* border: 2px solid red; */
+  /* border: 2px solid rgb(23, 255, 81); */
   flex: 1;
   display: flex;
   align-items: center;
