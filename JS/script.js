@@ -76,6 +76,16 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             if (playerTurn == true) {
                 currentLevel = 1;
+                if (gameMode === "Normal")
+                {
+                    lives = 1 + livesUnlocked;
+                    for (let i = 0; i < lives; i++)
+                    {
+                        hearts[i].style.display = "inline";
+                        heartTypes[i].src = "../images/heart.png";
+                    } 
+                }
+                resetGame();
                 startGame();
             }
             
