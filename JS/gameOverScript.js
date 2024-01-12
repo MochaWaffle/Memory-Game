@@ -1,6 +1,3 @@
-// import { currentLevel, gameModeBtn } from "./script.js";
-// import { gameMode } from "./script.js";
-
 function handleDOMContentLoaded() {
     const bodyElement = document.body;
     const storedGameMode = localStorage.getItem('gameMode');
@@ -67,7 +64,7 @@ function handleDOMContentLoaded() {
             startButton.style.opacity = "1"; // Make the button visible
             startButton.addEventListener("click", function() {
                 // Redirect to the index.html page
-                window.location.href = "../HTML/index.html";
+                window.location.href = "../index.html";
             });
         }, 1500); // Time it appears (in milliseconds)
         gamemodeTitle.style.color = 'white';
