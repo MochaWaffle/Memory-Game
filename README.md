@@ -11,7 +11,7 @@
 > This website is a personal project, not for making money or anything like that.
 
 ## :link: Visit 🔗
-- https://mochas-memory-game.netlify.app/
+- [https://mochas-memory-game.netlify.app/](https://mochawaffle-memory-game.netlify.app/)
 ## CREDITS/SOURCE:
 
 - Heart Images: https://icons8.com/icon/36026/favorite
